@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+import "common/proto/broadcast.proto";
+
+package proto;
+
+service Say {
+    rpc Hello(Request) returns (mypack.NoReply) { option (mypack.Broadcast) = true; }
+}
+
+message Request {
+    required string name = 1;
+}
