@@ -1,4 +1,4 @@
-syntax = "proto2";
+syntax = "proto3";
 
 import "common/proto/broadcast.proto";
 
@@ -9,5 +9,5 @@ service Say {
 }
 
 message Request {
-    required string name = 1;
+    string name = 1;
 }

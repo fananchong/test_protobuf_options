@@ -1,11 +1,11 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package mypack;
 
 import "protoc-gen-go/descriptor/descriptor.proto";
 
 extend google.protobuf.MethodOptions {
-  optional bool Broadcast = 1000;
+    bool Broadcast = 1000;
 }
 
 message NoReply {}
