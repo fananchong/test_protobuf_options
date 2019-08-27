@@ -1,3 +1,5 @@
+set GOPROXY=https://goproxy.io
+go get github.com/golang/protobuf
 go list -m -f "{{.Dir}}" github.com/golang/protobuf > temp
 set /P DEP=<temp
 echo %DEP%
