@@ -1,3 +1,5 @@
 https://github.com/golang/protobuf/issues/748
 
 https://github.com/golang/protobuf/issues/897
+
+https://github.com/golang/protobuf/issues/489

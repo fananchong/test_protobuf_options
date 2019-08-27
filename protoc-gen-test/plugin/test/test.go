@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strings"
 
+	mypack "github.com/fananchong/test_protobuf_options"
+	"github.com/golang/protobuf/proto"
 	pb "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	"github.com/golang/protobuf/protoc-gen-go/generator"
 )
@@ -97,16 +99,6 @@ func (g *test) generateService(file *generator.FileDescriptor, service *pb.Servi
 	g.P("// For example")
 	g.P()
 
-	tmp := "aa"
-	for _, v := range file.GetExtension() {
-		if tmp != "" {
-			tmp += "\n"
-		}
-		tmp += fmt.Sprintf("%v", *v)
-	}
-
-	g.P("// ", tmp)
-
 	// Client interface.
 	g.P("type ", servAlias, " interface {")
 	for i, method := range service.Method {
@@ -121,13 +113,13 @@ func (g *test) generateClientSignature(servName string, method *pb.MethodDescrip
 	origMethName := method.GetName()
 	methName := generator.CamelCase(origMethName)
 
-	// tmp := "aa"
-	// for _, v := range method.GetOptions().GetUninterpretedOption() {
-	// 	if tmp != "" {
-	// 		tmp += "\n"
-	// 	}
-	// 	tmp += fmt.Sprintf("%v", *v)
-	// }
+	isBroadcast := false
+	if v, err := proto.GetExtension(method.GetOptions(), mypack.E_Broadcast); err == nil {
+		isBroadcast = *(v.(*bool))
+	}
+	if isBroadcast {
+		return fmt.Sprintf("Broadcast%s(ctx %s.Context) error", methName, contextPkg)
+	}
 	return fmt.Sprintf("%s(ctx %s.Context) error", methName, contextPkg)
 }
 
