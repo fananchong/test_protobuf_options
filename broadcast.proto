@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package mypack;
-option go_package = "github.com/fananchong/test_protobuf_options";
+option go_package = "github.com/fananchong/test_protobuf_options;mypack";
 import "protoc-gen-go/descriptor/descriptor.proto";
 
 extend google.protobuf.MethodOptions {
