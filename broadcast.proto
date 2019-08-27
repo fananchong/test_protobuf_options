@@ -5,7 +5,7 @@ option go_package = "github.com/fananchong/test_protobuf_options;mypack";
 import "protoc-gen-go/descriptor/descriptor.proto";
 
 extend google.protobuf.MethodOptions {
-    bool Broadcast = 1000;
+    bool Broadcast = 50000;
 }
 
 message NoReply {}
